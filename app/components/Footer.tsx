@@ -3,10 +3,10 @@ import { ArrowUpRight } from "lucide-react"
 
 export default function Footer() {
     return (
-        <footer className="mt-10">
+        <footer className="mt-10 text-16">
             <div className="bg-linear-to-r from-[#6ee7d8] to-[#2f6f66]">
-                <div className="mx-auto max-w-450 px-10 py-14">
-                    <ul className="text-2xl font-light text-white">
+                <div className="mx-auto w-full max-w-370 px-10 py-14">
+                    <ul className="font-light text-black">
                         <li>
                             <a href="https://www.instagram.com/garden_koh" className="flex items-center gap-1 hover:opacity-70">
                                 instagram
@@ -30,7 +30,7 @@ export default function Footer() {
             </div>
 
             <div className="bg-white">
-                <div className="mx-auto max-w-450 px-10 py-1 text-black">
+                <div className="mx-auto w-full max-w-370 px-10 py-1 text-right text-black">
                     @2026 matoro All right reserved.
                 </div>
             </div>
