@@ -1,11 +1,12 @@
 // 하단 정보
 import { ArrowUpRight } from "lucide-react"
+import Container from "./Container"
 
 export default function Footer() {
     return (
-        <footer className="mt-10 text-16">
+        <footer className="mt-10 text-[16px]">
             <div className="bg-linear-to-r from-[#6ee7d8] to-[#2f6f66]">
-                <div className="mx-auto w-full max-w-370 px-10 py-14">
+                <Container className="py-14">
                     <ul className="font-light text-black">
                         <li>
                             <a href="https://www.instagram.com/garden_koh" className="flex items-center gap-1 hover:opacity-70">
@@ -26,13 +27,13 @@ export default function Footer() {
                             </a>
                         </li>
                     </ul>
-                </div>
+                </Container>
             </div>
 
             <div className="bg-white">
-                <div className="mx-auto w-full max-w-370 px-10 py-1 text-right text-black">
+                <Container className="py-1 text-right text-black">
                     @2026 matoro All right reserved.
-                </div>
+                </Container>
             </div>
         </footer>
     )
