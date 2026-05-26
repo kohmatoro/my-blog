@@ -1,7 +1,13 @@
 import PostCard from "./components/PostCard"
 import Container from "./components/Container"
+import { getAllPosts } from "@/lib/posts"
 
 export default function Home() {
+
+    const posts = getAllPosts();
+
+  console.log(posts);
+
   return (
     <div>
       <Container className="py-2">
@@ -23,7 +29,8 @@ export default function Home() {
         <span>3</span>
 
         <span>{">"}</span>
-      </div>      
+      </div>
+
     </div>
   )
 }
