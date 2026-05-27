@@ -12,9 +12,9 @@ export default function SearchBar({ postCount }: SearchBarProps) {
                     {postCount}개의 게시글
                 </p>
 
-                <div className="rounded-full border border-neutral-400 bg-neutral-700 px-20 py-3 opacity-50 mx-5">
+                {/* <div className="rounded-full border border-neutral-400 bg-neutral-700 px-20 py-3 opacity-50 mx-5">
                     
-                </div>
+                </div> */}
             </div>
         </Container>
     )

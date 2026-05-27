@@ -22,7 +22,7 @@ export default async function Home({
       ? posts
       : posts.filter((post) => post.category === selectedCategory)
 
-  const visiblePosts = filteredPosts.slice(0, 6);
+  const visiblePosts = filteredPosts.slice(0, 5);
 
   return (
     <div>
@@ -42,7 +42,7 @@ export default async function Home({
         </section>
       </Container>
 
-      <div className="flex justify-center items-center gap-4 px-4 py-4">
+      {/* <div className="flex justify-center items-center gap-4 px-4 py-4">
         <span>{"<"}</span>
 
         <span>1</span>
@@ -50,7 +50,7 @@ export default async function Home({
         <span>3</span>
 
         <span>{">"}</span>
-      </div>
+      </div> */}
 
     </div>
   )

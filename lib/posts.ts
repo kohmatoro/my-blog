@@ -1,4 +1,4 @@
-// 6단계: app/page.tsx에서 카드로 보이는가?
+// 데이터 제작.
 
 import path from "path";
 import fs from "fs";

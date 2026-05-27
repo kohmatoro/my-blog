@@ -1,11 +1,23 @@
 // 헤더
+"use client";
+
 import Image from "next/image"
 import Container from "./Container"
 import Link from "next/link"
-
-// className="text-[#6ee7d8]"
+import { useSearchParams } from "next/navigation";
 
 export default function Header() {
+
+  const searchParams = useSearchParams();
+  const selectedCategory = searchParams.get("category") ?? "전체";
+
+
+  const categories = [
+    { label: "전체", href: "/" },
+    { label: "음악", href: "/?category=음악" },
+    { label: "일상", href: "/?category=일상" },
+    { label: "개발", href: "/?category=개발" },
+  ];
 
   return (
     <header className="py-8">
@@ -24,22 +36,25 @@ export default function Header() {
             </h1>
           </div>
 
-
           <ul className="text-[20px] flex gap-5">
-            <li>
-                <Link href={"/"}>전체</Link>
-            </li>
-            <li>
-                <Link href={"/?category=음악"}>음악</Link>
-            </li>
-            <li>
-                <Link href={"/?category=일상"}>일상</Link>
-            </li>
-            <li>
-                <Link href={"/?category=개발"}>개발</Link>
-            </li>
+            {categories.map((category) => {
+              const isActive = selectedCategory === category.label
+              return(
+                <li key={category.label}>
+                  <Link
+                    href={category.href}
+                    className={
+                      isActive
+                      ? "text-[#6ee7d8] border-b-2 border-[#6ee7d8]"
+                      : "text-white" 
+                    }
+                  >
+                    {category.label}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
-
         </div>
       </Container>
     </header>
