@@ -1,8 +1,12 @@
 // 헤더
 import Image from "next/image"
 import Container from "./Container"
+import Link from "next/link"
+
+// className="text-[#6ee7d8]"
 
 export default function Header() {
+
   return (
     <header className="py-8">
       <Container>
@@ -22,10 +26,18 @@ export default function Header() {
 
 
           <ul className="text-[20px] flex gap-5">
-            <li className="text-[#6ee7d8]">전체</li>
-            <li>음악</li>
-            <li>일상</li>
-            <li>개발</li>
+            <li>
+                <Link href={"/"}>전체</Link>
+            </li>
+            <li>
+                <Link href={"/?category=음악"}>음악</Link>
+            </li>
+            <li>
+                <Link href={"/?category=일상"}>일상</Link>
+            </li>
+            <li>
+                <Link href={"/?category=개발"}>개발</Link>
+            </li>
           </ul>
 
         </div>
