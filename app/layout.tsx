@@ -21,7 +21,9 @@ export default function RootLayout({
       <body className="bg-black text-white min-h-screen flex flex-col">
         <Header />
         <SearchBar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

@@ -1,7 +1,3 @@
-// 4단계: title, description, category, date가 객체로 만들어지는가?
-
-// 5단계: posts 배열로 반환되는가?
-
 // 6단계: app/page.tsx에서 카드로 보이는가?
 
 import path from "path";
@@ -15,24 +11,26 @@ export function getAllPosts() {
 
     const fileNames = fs.readdirSync(postsDirectory);
 
-    const slug = fileNames[0].replace(".md", "")
+    const posts = fileNames.map((file) => {
+            const slug = file.replace(".md", "")
 
-    const fileName = path.join(postsDirectory, fileNames[0])
+            const fullPath = path.join(postsDirectory, file)
 
-    const fileRead = fs.readFileSync(fileName, "utf-8")
+            const fileRead = fs.readFileSync(fullPath, "utf-8")
 
-    const gray = matter(fileRead)
+            const gray = matter(fileRead)
 
-    const matterData = {
-        slug: slug,
-        title: gray.data.title,
-        description: gray.data.description,
-        category: gray.data.category,
-        date: gray.data.date,
-        thumbnail: gray.data.thumbnail
-    }
+            const matterData = {
+                slug: slug,
+                title: gray.data.title,
+                description: gray.data.description,
+                category: gray.data.category,
+                date: gray.data.date,
+                thumbnail: gray.data.thumbnail
+            };
 
-    return (
-        matterData
-    )
+            return matterData;
+    });
+
+    return posts;
 }
