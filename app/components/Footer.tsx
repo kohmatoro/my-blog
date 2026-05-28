@@ -5,9 +5,9 @@ import Container from "./Container"
 export default function Footer() {
     return (
         <footer className="mt-10 text-[16px]">
-            <div className="bg-linear-to-r from-[#6ee7d8] to-[#2f6f66]">
+            <div className="bg-linear-to-r from-[#245148] via-[#1D3F39] to-[#132622]">
                 <Container className="py-14">
-                    <ul className="font-light text-black">
+                    <ul className="font-light text-white">
                         <li>
                             <a href="https://www.instagram.com/garden_koh" className="flex items-center gap-1 hover:opacity-70">
                                 instagram
