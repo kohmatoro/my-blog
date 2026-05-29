@@ -1,7 +1,8 @@
 import PostCard from "./components/PostCard"
 import Container from "./components/Container"
 import { getAllPosts } from "@/lib/posts"
-import SearchBar from "./components/SearchBar"
+import Counter from "./components/Counter"
+import CategoryTabs from "./components/CategoryTabs"
 
 export default async function Home({
 // searchParams = URL의 ? 뒤에 붙은 값들을 담고 있는 객체임.
@@ -26,32 +27,28 @@ export default async function Home({
 
   return (
     <div>
-      <SearchBar postCount={posts.length}/>
-      <Container className="flex min-h-[calc(100vh-200px)] flex-col">
-        <section className="grid grid-cols-2 gap-x-1">
+      <Container className="mx-auto flex min-h-[calc(100vh-200px)] max-w-270 flex-col">
+        <div className="mx-auto mb-14 grid w-243.5 grid-cols-2 items-center gap-x-10">
+          <Counter postCount={posts.length} />
+          <div className="justify-self-end">
+            <CategoryTabs selectedCategory={selectedCategory} />
+          </div>
+        </div>
+
+      <section className="mx-auto grid w-243.5 grid-cols-2 gap-x-10 gap-y-14">
           {visiblePosts.map((post) => (
               <PostCard
                   key={post.slug}
+                  slug={post.slug}
                   title={post.title}
                   description={post.description}
                   category={post.category}
-                  // date={post.date}
+                  date={post.date}
                   thumbnail={post.thumbnail}
               />
           ))}
         </section>
       </Container>
-
-      {/* <div className="flex justify-center items-center gap-4 px-4 py-4">
-        <span>{"<"}</span>
-
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-
-        <span>{">"}</span>
-      </div> */}
-
     </div>
   )
 }

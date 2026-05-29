@@ -45,3 +45,19 @@ export function getAllPosts() {
 
     return posts;
 }
+
+export function getPostBySlug(slug: string) {
+    const fullPath = path.join(postsDirectory, `${slug}.md`);
+    const fileRead = fs.readFileSync(fullPath, "utf-8");
+    const gray = matter(fileRead);
+
+    return {
+        slug,
+        title: gray.data.title,
+        description: gray.data.description,
+        category: gray.data.category,
+        date: gray.data.date,
+        thumbnail: gray.data.thumbnail,
+        content: gray.content,
+    };
+}
