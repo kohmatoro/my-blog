@@ -21,14 +21,14 @@ export default function PostCard({
     thumbnail,
 }: PostCardProps) {
     return (
-        <Link href={`/posts/${slug}`} className="group -m-2 block w-full rounded-2xl p-2 transition-colors duration-300 hover:bg-white/5">
-            <article className="overflow-hidden">
+        <Link href={`/posts/${slug}`} className="group block w-full rounded-2xl transition-colors duration-300">
+            <article className="overflow-hidden rounded-2xl transition-colors duration-300">
                 <Image
                     src={thumbnail}
                     alt={title}
                     width={467}
                     height={264}
-                    className="aspect-[467/264] h-auto w-full rounded-xl border border-white/15 bg-neutral-700 object-cover opacity-50 transition duration-300 group-hover:border-white/25 group-hover:opacity-70"
+                    className="aspect-[467/264] h-auto w-full rounded-2xl border border-white/15 bg-neutral-700 object-cover opacity-50 transition duration-300 group-hover:border-white/25 group-hover:opacity-70"
                 />
 
                 <div className="mt-3 flex flex-wrap items-center gap-2 text-[13px] text-white/65 md:text-[14px]">

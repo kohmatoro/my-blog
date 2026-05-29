@@ -13,7 +13,7 @@ const categories = [
 
 export default function CategoryTabs({ selectedCategory }: CategoryTabsProps) {
   return (
-    <ul className="flex max-w-[calc(100vw-2rem)] shrink-0 gap-6 overflow-x-auto whitespace-nowrap text-[18px] scrollbar-hide md:max-w-none md:gap-8 md:text-[20px]">
+    <ul className="flex max-w-[calc(100vw-2rem)] shrink-0 gap-4 overflow-x-auto whitespace-nowrap text-[15px] scrollbar-hide sm:gap-5 sm:text-[16px] md:max-w-none md:gap-8 md:text-[20px]">
       {categories.map((category) => {
         const isActive = selectedCategory === category.label;
 
