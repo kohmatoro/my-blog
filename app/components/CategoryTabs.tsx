@@ -13,7 +13,7 @@ const categories = [
 
 export default function CategoryTabs({ selectedCategory }: CategoryTabsProps) {
   return (
-    <ul className="flex shrink-0 gap-8 whitespace-nowrap text-[20px]">
+    <ul className="flex max-w-[calc(100vw-2rem)] shrink-0 gap-6 overflow-x-auto whitespace-nowrap text-[18px] scrollbar-hide md:max-w-none md:gap-8 md:text-[20px]">
       {categories.map((category) => {
         const isActive = selectedCategory === category.label;
 
@@ -23,8 +23,8 @@ export default function CategoryTabs({ selectedCategory }: CategoryTabsProps) {
               href={category.href}
               className={
                 isActive
-                  ? "inline-block border-b-2 border-[#6ee7d8] pb-1 text-[#6ee7d8]"
-                  : "inline-block text-white"
+                  ? "inline-block border-b-2 border-[#6ee7d8] pb-1 text-[#6ee7d8] transition-colors"
+                  : "inline-block text-white/70 transition-colors hover:text-white"
               }
             >
               {category.label}

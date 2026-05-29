@@ -23,13 +23,16 @@ export default async function Home({
       ? posts
       : posts.filter((post) => post.category === selectedCategory);
 
-  const visiblePosts = filteredPosts.slice(0, 5);
+  // const visiblePosts = filteredPosts.slice(0, 5);
+
+  const visiblePosts = filteredPosts;
+
 
   return (
     <div>
       <Container className="mx-auto flex min-h-[calc(100vh-200px)] w-full max-w-[974px] flex-col px-4">
         <div className="mb-10 flex items-center justify-between gap-4 md:mb-14">
-          <Counter postCount={posts.length} />
+          <Counter postCount={filteredPosts.length} />
           <div className="shrink-0">
             <CategoryTabs selectedCategory={selectedCategory} />
           </div>
