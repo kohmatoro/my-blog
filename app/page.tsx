@@ -27,20 +27,20 @@ export default async function Home({
 
   return (
     <div>
-      <Container className="mx-auto flex min-h-[calc(100vh-200px)] max-w-270 flex-col">
-        <div className="mx-auto mb-14 grid w-243.5 grid-cols-2 items-center gap-x-10">
+      <Container className="mx-auto flex min-h-[calc(100vh-200px)] w-full max-w-[974px] flex-col px-4">
+        <div className="mb-10 flex items-center justify-between gap-4 md:mb-14">
           <Counter postCount={posts.length} />
-          <div className="justify-self-end">
+          <div className="shrink-0">
             <CategoryTabs selectedCategory={selectedCategory} />
           </div>
         </div>
 
         {visiblePosts.length === 0 ? (
-          <div className="mx-auto flex w-243.5 items-center justify-center py-24 text-[18px] font-light text-white/45">
+          <div className="flex w-full items-center justify-center py-24 text-[18px] font-light text-white/45">
             아직 게시글이 없습니다.
           </div>
         ) : (
-          <section className="mx-auto grid w-243.5 grid-cols-2 gap-x-10 gap-y-14">
+          <section className="grid w-full grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-10 md:gap-y-14">
             {visiblePosts.map((post) => (
               <PostCard
                 key={post.slug}
