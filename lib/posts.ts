@@ -43,11 +43,18 @@ export function getAllPosts() {
             return matterData;
     });
 
-    return posts;
+    return posts.sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
 }
 
 export function getPostBySlug(slug: string) {
     const fullPath = path.join(postsDirectory, `${slug}.md`);
+
+    if (!fs.existsSync(fullPath)) {
+        return null;
+    }
+
     const fileRead = fs.readFileSync(fullPath, "utf-8");
     const gray = matter(fileRead);
 

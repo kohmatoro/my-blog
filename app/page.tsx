@@ -21,7 +21,7 @@ export default async function Home({
   const filteredPosts =
     selectedCategory === "전체"
       ? posts
-      : posts.filter((post) => post.category === selectedCategory)
+      : posts.filter((post) => post.category === selectedCategory);
 
   const visiblePosts = filteredPosts.slice(0, 5);
 
@@ -35,19 +35,25 @@ export default async function Home({
           </div>
         </div>
 
-      <section className="mx-auto grid w-243.5 grid-cols-2 gap-x-10 gap-y-14">
-          {visiblePosts.map((post) => (
+        {visiblePosts.length === 0 ? (
+          <div className="mx-auto flex w-243.5 items-center justify-center py-24 text-[18px] font-light text-white/45">
+            아직 게시글이 없습니다.
+          </div>
+        ) : (
+          <section className="mx-auto grid w-243.5 grid-cols-2 gap-x-10 gap-y-14">
+            {visiblePosts.map((post) => (
               <PostCard
-                  key={post.slug}
-                  slug={post.slug}
-                  title={post.title}
-                  description={post.description}
-                  category={post.category}
-                  date={post.date}
-                  thumbnail={post.thumbnail}
+                key={post.slug}
+                slug={post.slug}
+                title={post.title}
+                description={post.description}
+                category={post.category}
+                date={post.date}
+                thumbnail={post.thumbnail}
               />
-          ))}
-        </section>
+            ))}
+          </section>
+        )}
       </Container>
     </div>
   )

@@ -1,6 +1,7 @@
 import { getAllPosts, getPostBySlug } from "@/lib/posts"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import { notFound } from "next/navigation"
 
 type PostPageProps = {
     params: Promise<{
@@ -19,6 +20,11 @@ export function generateStaticParams() {
 export default async function PostPage({ params }: PostPageProps) {
     const { slug } = await params;
     const post = getPostBySlug(slug);
+
+    if (!post) {
+        notFound();
+    }
+
     const contentWithoutTitle = post.content.replace(/^#\s+.*\n+/, "");
 
     return (
