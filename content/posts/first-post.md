@@ -12,7 +12,7 @@ thumbnail: "/images/post-1.png"
 
 ---
 
-# 첫 번째 글
+
 
 27일 기준 현재까지의 블로그 구조
 

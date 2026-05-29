@@ -12,7 +12,6 @@ thumbnail: "/images/post-2.png"
 
 ---
 
-# 두 번째 글
 
 여기서 위쪽 --- 사이에 있는 부분을 frontmatter라고 해요.
 

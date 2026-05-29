@@ -1,25 +1,25 @@
 // 헤더
-import Image from "next/image"
-import Link from "next/link"
-import Container from "./Container"
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="pt-16 pb-12">
-      <Container>
-        <Link href="/" className="inline-flex items-center gap-4">
-          <Image
-            src="/logo2.svg"
-            alt="logo"
-            width={64}
-            height={64}
-          />
+    <>
+      <header className="site-header">
+        <div className="site-header-inner">
+          <Link href="/" className="ml-7 inline-flex items-center" aria-label="Go to home">
+            <Image
+              src="/logo2.svg"
+              alt="logo"
+              width={54}
+              height={54}
+              priority
+            />
+          </Link>
+        </div>
+      </header>
 
-          {/* <span className="text-[36px] font-light leading-none">
-            log
-          </span> */}
-        </Link>
-      </Container>
-    </header>
-  )
+      <div style={{ height: "100px" }} aria-hidden="true" />
+    </>
+  );
 }
