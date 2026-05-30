@@ -32,8 +32,7 @@ export default async function PostPage({ params }: PostPageProps) {
             <div
                 className="mx-auto"
                 style={{
-                    width: "620px",
-                    maxWidth: "calc(100vw - 48px)",
+                    width: "min(620px, calc(100vw - 96px))",
                 }}
             >
                 <div className="mb-1 flex items-center gap-3 text-[16px] font-light text-white/70">
@@ -43,14 +42,14 @@ export default async function PostPage({ params }: PostPageProps) {
                     <span>{post.date}</span>
                 </div>
 
-                <h1 className="text-[36px] font-semibold leading-tight tracking-[-0.02em] text-white">
+                <h1 className="text-[32px] font-semibold leading-tight tracking-[-0.02em] text-white md:text-[36px]">
                     {post.title}
                 </h1>
 
                 <img
                     src={post.thumbnail}
                     alt={post.title}
-                    className="mt-10 block h-auto max-w-full rounded-2xl opacity-60"
+                    className="mt-8 block h-auto max-w-full rounded-2xl opacity-60 md:mt-10"
                 />
 
                 <div className="mt-10 text-white/70">
