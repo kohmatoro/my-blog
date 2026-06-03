@@ -21,22 +21,30 @@ export default function PostCard({
     thumbnail,
 }: PostCardProps) {
     return (
-        <Link href={`/posts/${slug}`} className="group block w-full rounded-2xl transition-colors duration-300">
-            <article className="overflow-hidden rounded-2xl transition-colors duration-300">
+        <Link href={`/posts/${slug}`} className="group block w-full rounded-2xl">
+            <article className="rounded-2xl p-3 transition-colors duration-300 hover:bg-white/[0.04]">
                 <Image
                     src={thumbnail}
                     alt={title}
                     width={467}
                     height={264}
-                    className="aspect-[467/264] h-auto w-full rounded-2xl border border-white/15 bg-neutral-700 object-cover opacity-50 transition duration-300 group-hover:border-white/25 group-hover:opacity-70"
+                    className="aspect-[467/264] h-auto w-full rounded-xl border border-white/15 bg-neutral-700 object-cover opacity-50 transition duration-300 group-hover:border-white/25 group-hover:opacity-75"
                 />
 
-                <div className="mt-3 flex flex-wrap items-center gap-2 text-[13px] text-white/65 md:text-[14px]">
-                    <span className="font-semibold text-white/80">{category}</span>
-                    <span className="text-[#777777]">{date}</span>
+                <div className="px-1 pb-1 pt-3">
+                    <div className="flex flex-wrap items-center gap-2 text-[13px] text-white/65 md:text-[14px]">
+                        <span className="font-semibold text-white/80">{category}</span>
+                        <span className="text-[#777777]">{date}</span>
+                    </div>
+
+                    <h2 className="mt-1 break-words text-[22px] font-semibold leading-tight text-white transition-colors duration-300 md:text-[24px]">
+                        {title}
+                    </h2>
+
+                    <p className="mt-1 break-words text-[14px] leading-relaxed text-white/50 transition-colors duration-300 group-hover:text-white/65 md:text-[15px]">
+                        {description}
+                    </p>
                 </div>
-                <h2 className="mt-1 text-[22px] font-semibold leading-tight text-white transition-colors duration-300 group-hover:text-[#6ee7d8] md:text-[24px]">{title}</h2>
-                <p className="mt-1 line-clamp-2 text-[14px] leading-relaxed text-white/50 transition-colors duration-300 group-hover:text-white/65 md:text-[15px]">{description}</p>
             </article>
         </Link>
     )

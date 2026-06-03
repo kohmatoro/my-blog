@@ -49,7 +49,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 <img
                     src={post.thumbnail}
                     alt={post.title}
-                    className="mt-8 block h-auto max-w-full rounded-2xl opacity-60 md:mt-10"
+                    className="mt-8 block h-auto max-w-full opacity-60 md:mt-10"
                 />
 
                 <div className="mt-10 text-white/70">
@@ -71,6 +71,21 @@ export default async function PostPage({ params }: PostPageProps) {
                                     {children}
                                 </h3>
                             ),
+                            h4: ({ children }) => (
+                                <h4 className="mt-5 text-[18px] font-semibold leading-tight text-white/95">
+                                    {children}
+                                </h4>
+                            ),
+                            h5: ({ children }) => (
+                                <h5 className="mt-4 text-[16px] font-semibold leading-tight text-white/90">
+                                    {children}
+                                </h5>
+                            ),
+                            h6: ({ children }) => (
+                                <h6 className="mt-4 text-[14px] font-semibold leading-tight text-white/80">
+                                    {children}
+                                </h6>
+                            ),
                             p: ({ children }) => (
                                 <p className="mt-4 break-words text-[16px] font-light leading-8 text-white/70">
                                     {children}
@@ -91,6 +106,24 @@ export default async function PostPage({ params }: PostPageProps) {
                                     {children}
                                 </blockquote>
                             ),
+                            strong: ({ children }) => (
+                                <strong className="font-semibold text-white">
+                                    {children}
+                                </strong>
+                            ),
+                            em: ({ children }) => (
+                                <em className="italic text-white/80">
+                                    {children}
+                                </em>
+                            ),
+                            del: ({ children }) => (
+                                <del className="text-white/45 line-through">
+                                    {children}
+                                </del>
+                            ),
+                            hr: () => (
+                                <hr className="my-10 border-white/10" />
+                            ),
                             a: ({ href, children }) => (
                                 <a
                                     href={href}
@@ -101,13 +134,20 @@ export default async function PostPage({ params }: PostPageProps) {
                                     {children}
                                 </a>
                             ),
+                            img: ({ src, alt }) => (
+                                <img
+                                    src={src ?? ""}
+                                    alt={alt ?? ""}
+                                    className="my-8 block h-auto max-w-full opacity-80"
+                                />
+                            ),
                             code: ({ children }) => (
-                                <code className="rounded bg-white/10 px-1.5 py-0.5 text-[14px] text-[#6ee7d8]">
+                                <code className="bg-white/10 px-1.5 py-0.5 text-[14px] text-white/85">
                                     {children}
                                 </code>
                             ),
                             pre: ({ children }) => (
-                                <pre className="mt-6 overflow-x-auto rounded-xl bg-white/10 p-4 text-[14px] leading-7 text-white/80">
+                                <pre className="mt-6 overflow-x-auto bg-white/10 p-4 text-[14px] leading-7 text-white/80 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit">
                                     {children}
                                 </pre>
                             ),
