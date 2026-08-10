@@ -17,9 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="bg-black text-white min-h-screen flex flex-col">
+      <body className="flex min-h-screen flex-col bg-[#0b0b0b] text-white">
         <Header />
-        <main className="flex-1">
+        <main className="flex flex-1 flex-col">
           {children}
         </main>
         <Footer />

@@ -1,7 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 import { getAllPosts, getPostBySlug } from "@/lib/posts"
+import Container from "@/app/components/Container"
+import { ArrowLeft } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { notFound } from "next/navigation"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
-import { notFound } from "next/navigation"
 
 type PostPageProps = {
     params: Promise<{
@@ -9,12 +14,13 @@ type PostPageProps = {
     }>;
 };
 
-export function generateStaticParams() {
-    const posts = getAllPosts();
+function formatDate(date: string) {
+    const [year, month, day] = date.split("-");
+    return year && month && day ? `${year.slice(2)}.${month}.${day}` : date;
+}
 
-    return posts.map((post) => ({
-        slug: post.slug,
-    }));
+export function generateStaticParams() {
+    return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
 export default async function PostPage({ params }: PostPageProps) {
@@ -28,129 +34,62 @@ export default async function PostPage({ params }: PostPageProps) {
     const contentWithoutTitle = post.content.replace(/^#\s+.*\n+/, "");
 
     return (
-        <article className="pb-24">
-            <div
-                className="mx-auto"
-                style={{
-                    width: "min(620px, calc(100vw - 96px))",
-                }}
-            >
-                <div className="mb-1 flex items-center gap-3 text-[16px] font-light text-white/70">
-                    <span className="font-medium text-[#6ee7d8]">
-                        {post.category}
-                    </span>
-                    <span>{post.date}</span>
+        <article>
+            <Container className="px-0 sm:px-4">
+                <div className="relative h-[180px] overflow-hidden sm:aspect-[4/1] sm:h-auto">
+                    <Image
+                        src={post.thumbnail}
+                        alt=""
+                        fill
+                        priority
+                        sizes="(max-width: 1056px) 100vw, 1024px"
+                        className="object-cover opacity-80"
+                    />
                 </div>
+            </Container>
 
-                <h1 className="text-[32px] font-semibold leading-tight tracking-[-0.02em] text-white md:text-[36px]">
+            <div className="mx-auto w-full max-w-[678px] px-4 pt-14 sm:pt-17">
+                <Link href="/" className="inline-flex items-center gap-2 text-[13px] text-white/30 transition-colors hover:text-white/70">
+                    <span className="inline-flex h-5 w-6 items-center justify-center rounded bg-white/35 text-black">
+                        <ArrowLeft size={15} strokeWidth={2.5} />
+                    </span>
+                    이전으로
+                </Link>
+
+                <h1 className="mt-10 break-keep text-[25px] font-semibold leading-[1.4] tracking-[-0.025em] text-white sm:text-[27px]">
                     {post.title}
                 </h1>
 
-                <img
-                    src={post.thumbnail}
-                    alt={post.title}
-                    className="mt-8 block h-auto max-w-full opacity-60 md:mt-10"
-                />
+                <div className="mt-7 flex items-center justify-between border-b border-white/75 pb-4 text-[14px]">
+                    <span className="text-[#48ad98]">{post.category}</span>
+                    <time className="text-white/35" dateTime={post.date}>{formatDate(post.date)}</time>
+                </div>
 
-                <div className="mt-10 text-white/70">
+                <div className="pb-4 pt-5 text-white/80">
                     <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         components={{
-                            h1: ({ children }) => (
-                                <h1 className="mt-10 text-[30px] font-semibold leading-tight text-white">
-                                    {children}
-                                </h1>
-                            ),
-                            h2: ({ children }) => (
-                                <h2 className="mt-8 text-[24px] font-semibold leading-tight text-white">
-                                    {children}
-                                </h2>
-                            ),
-                            h3: ({ children }) => (
-                                <h3 className="mt-6 text-[20px] font-semibold leading-tight text-white">
-                                    {children}
-                                </h3>
-                            ),
-                            h4: ({ children }) => (
-                                <h4 className="mt-5 text-[18px] font-semibold leading-tight text-white/95">
-                                    {children}
-                                </h4>
-                            ),
-                            h5: ({ children }) => (
-                                <h5 className="mt-4 text-[16px] font-semibold leading-tight text-white/90">
-                                    {children}
-                                </h5>
-                            ),
-                            h6: ({ children }) => (
-                                <h6 className="mt-4 text-[14px] font-semibold leading-tight text-white/80">
-                                    {children}
-                                </h6>
-                            ),
-                            p: ({ children }) => (
-                                <p className="mt-4 break-words text-[16px] font-light leading-8 text-white/70">
-                                    {children}
-                                </p>
-                            ),
-                            ul: ({ children }) => (
-                                <ul className="mt-4 list-disc space-y-2 pl-6 text-[16px] font-light leading-8 text-white/70">
-                                    {children}
-                                </ul>
-                            ),
-                            ol: ({ children }) => (
-                                <ol className="mt-4 list-decimal space-y-2 pl-6 text-[16px] font-light leading-8 text-white/70">
-                                    {children}
-                                </ol>
-                            ),
-                            blockquote: ({ children }) => (
-                                <blockquote className="mt-6 border-l-4 border-[#6ee7d8] pl-4 text-white/60">
-                                    {children}
-                                </blockquote>
-                            ),
-                            strong: ({ children }) => (
-                                <strong className="font-semibold text-white">
-                                    {children}
-                                </strong>
-                            ),
-                            em: ({ children }) => (
-                                <em className="italic text-white/80">
-                                    {children}
-                                </em>
-                            ),
-                            del: ({ children }) => (
-                                <del className="text-white/45 line-through">
-                                    {children}
-                                </del>
-                            ),
-                            hr: () => (
-                                <hr className="my-10 border-white/10" />
-                            ),
-                            a: ({ href, children }) => (
-                                <a
-                                    href={href}
-                                    className="text-[#6ee7d8] underline underline-offset-4"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    {children}
-                                </a>
-                            ),
-                            img: ({ src, alt }) => (
-                                <img
-                                    src={src ?? ""}
-                                    alt={alt ?? ""}
-                                    className="my-8 block h-auto max-w-full opacity-80"
-                                />
-                            ),
-                            code: ({ children }) => (
-                                <code className="bg-white/10 px-1.5 py-0.5 text-[14px] text-white/85">
-                                    {children}
-                                </code>
-                            ),
-                            pre: ({ children }) => (
-                                <pre className="mt-6 overflow-x-auto bg-white/10 p-4 text-[14px] leading-7 text-white/80 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit">
-                                    {children}
-                                </pre>
-                            ),
+                            h1: ({ children }) => <h1 className="mt-12 text-[28px] font-semibold leading-tight text-white">{children}</h1>,
+                            h2: ({ children }) => <h2 className="mt-11 text-[23px] font-semibold leading-tight text-white">{children}</h2>,
+                            h3: ({ children }) => <h3 className="mt-9 text-[20px] font-semibold leading-tight text-white">{children}</h3>,
+                            h4: ({ children }) => <h4 className="mt-8 text-[18px] font-semibold text-white/95">{children}</h4>,
+                            h5: ({ children }) => <h5 className="mt-7 text-[16px] font-semibold text-white/90">{children}</h5>,
+                            h6: ({ children }) => <h6 className="mt-7 text-[14px] font-semibold text-white/80">{children}</h6>,
+                            p: ({ children }) => <p className="mt-5 break-words text-[15px] font-light leading-[1.75] text-white/80">{children}</p>,
+                            ul: ({ children }) => <ul className="mt-5 list-disc space-y-2 pl-6 text-[15px] font-light leading-[1.75] text-white/80">{children}</ul>,
+                            ol: ({ children }) => <ol className="mt-5 list-decimal space-y-2 pl-6 text-[15px] font-light leading-[1.75] text-white/80">{children}</ol>,
+                            blockquote: ({ children }) => <blockquote className="mt-7 border-l-2 border-[#48ad98] pl-5 text-white/60">{children}</blockquote>,
+                            strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
+                            em: ({ children }) => <em className="italic text-white/85">{children}</em>,
+                            del: ({ children }) => <del className="text-white/45 line-through">{children}</del>,
+                            hr: () => <hr className="my-12 border-white/20" />,
+                            a: ({ href, children }) => <a href={href} className="text-[#62c5b1] underline underline-offset-4" target="_blank" rel="noreferrer">{children}</a>,
+                            img: ({ src, alt }) => <img src={src ?? ""} alt={alt ?? ""} className="my-9 block h-auto w-full opacity-90" />,
+                            code: ({ children }) => <code className="bg-white/10 px-1.5 py-0.5 text-[14px] text-white/90">{children}</code>,
+                            pre: ({ children }) => <pre className="mt-7 overflow-x-auto bg-white/[0.07] p-5 text-[14px] leading-7 text-white/85 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit">{children}</pre>,
+                            table: ({ children }) => <div className="mt-7 overflow-x-auto"><table className="w-full border-collapse text-left text-[14px]">{children}</table></div>,
+                            th: ({ children }) => <th className="border border-white/20 bg-white/10 px-3 py-2 font-semibold">{children}</th>,
+                            td: ({ children }) => <td className="border border-white/15 px-3 py-2 text-white/70">{children}</td>,
                         }}
                     >
                         {contentWithoutTitle}
