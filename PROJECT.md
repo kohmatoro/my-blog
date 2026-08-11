@@ -142,7 +142,7 @@ my-blog/
 
 - 파일 기반 포스트 구조는 유지한다. 새 글은 반드시 `content/posts/{slug}.md`로 추가한다.
 - frontmatter 키는 `title`, `description`, `category`, `date`, `thumbnail`을 유지하고, 누락 없이 작성한다.
-- `category` 값은 기존 허용값과 정확히 일치시킨다. 현재 기준은 `전체`, `음악`, `일상`, `개발`이다.
+- `category` 값은 기존 허용값과 정확히 일치시킨다. 현재 기준은 `포스트`, `개발`, `음악`이다.
 - 썸네일 경로는 `public/images/` 아래 파일을 가리키는 `/images/...` 형식을 사용한다.
 - 목록과 상세가 같은 메타데이터를 쓰므로, frontmatter 형식 변경은 `lib/posts.ts`, 목록 카드, 상세 페이지를 함께 수정한다.
 - 정렬이나 필터 기준을 바꿀 때는 `getAllPosts()`와 `app/page.tsx`의 동작을 같이 확인한다.

@@ -15,7 +15,7 @@ function GithubIcon() {
 
 export default function Footer() {
     return (
-        <footer id="profile" className="mt-28 sm:mt-40">
+        <footer className="mt-28 sm:mt-40">
             <Container>
                 <div className="bg-[#48ad98] px-6 pb-6 pt-6 text-white">
                     <div className="border-b border-white/70 pb-4">

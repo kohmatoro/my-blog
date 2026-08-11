@@ -5,10 +5,9 @@ type CategoryTabsProps = {
 };
 
 const categories = [
-  { label: "전체", href: "/" },
-  { label: "음악", href: "/?category=음악" },
-  { label: "일상", href: "/?category=일상" },
+  { label: "포스트", href: "/" },
   { label: "개발", href: "/?category=개발" },
+  { label: "음악", href: "/?category=음악" },
 ];
 
 export default function CategoryTabs({ selectedCategory }: CategoryTabsProps) {

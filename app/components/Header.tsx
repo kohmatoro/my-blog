@@ -1,5 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
+import CategoryNav from "./CategoryNav";
+
+function CategoryNavFallback() {
+  return (
+    <ul className="flex items-center gap-6 text-[12px] text-white/30 sm:gap-8 sm:text-[13px]">
+      <li className="text-white/85">포스트</li>
+      <li>개발</li>
+      <li>음악</li>
+    </ul>
+  );
+}
 
 export default function Header() {
   return (
@@ -17,17 +29,9 @@ export default function Header() {
         </Link>
 
         <nav aria-label="주요 메뉴">
-          <ul className="flex items-center gap-6 text-[12px] text-white/30 sm:gap-8 sm:text-[13px]">
-            <li>
-              <Link href="/?category=전체" className="transition-colors hover:text-white">포스트</Link>
-            </li>
-            <li>
-              <Link href="/" className="text-white/85 transition-colors hover:text-white">개발</Link>
-            </li>
-            <li>
-              <a href="#profile" className="transition-colors hover:text-white">프로필</a>
-            </li>
-          </ul>
+          <Suspense fallback={<CategoryNavFallback />}>
+            <CategoryNav />
+          </Suspense>
         </nav>
       </div>
     </header>

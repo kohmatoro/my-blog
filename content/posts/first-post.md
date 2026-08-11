@@ -4,7 +4,7 @@ title: "마크다운 사용법입니다"
 
 description: "블로그 첫 글로 마크다운 사용법을 알아보아요."
 
-category: "개발"
+category: "포스트"
 
 date: "2026-05-30"
 
