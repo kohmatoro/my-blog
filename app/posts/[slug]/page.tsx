@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { getAllPosts, getPostBySlug } from "@/lib/posts"
+import { extractHeadings } from "@/lib/markdown"
+import ArticleMinimap from "@/app/components/ArticleMinimap"
 import Container from "@/app/components/Container"
 import { ArrowLeft } from "lucide-react"
 import Image from "next/image"
@@ -32,9 +34,13 @@ export default async function PostPage({ params }: PostPageProps) {
     }
 
     const contentWithoutTitle = post.content.replace(/^#\s+.*\n+/, "");
+    const headings = extractHeadings(contentWithoutTitle);
+    const headingIdByLine = new Map(headings.map((heading) => [heading.line, heading.id]));
 
     return (
         <article>
+            <ArticleMinimap headings={headings} />
+
             <Container className="px-0 sm:px-4">
                 <div className="relative h-[180px] overflow-hidden sm:aspect-[4/1] sm:h-auto">
                     <Image
@@ -69,12 +75,12 @@ export default async function PostPage({ params }: PostPageProps) {
                     <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         components={{
-                            h1: ({ children }) => <h1 className="mt-12 text-[28px] font-semibold leading-tight text-white">{children}</h1>,
-                            h2: ({ children }) => <h2 className="mt-11 text-[23px] font-semibold leading-tight text-white">{children}</h2>,
-                            h3: ({ children }) => <h3 className="mt-9 text-[20px] font-semibold leading-tight text-white">{children}</h3>,
-                            h4: ({ children }) => <h4 className="mt-8 text-[18px] font-semibold text-white/95">{children}</h4>,
-                            h5: ({ children }) => <h5 className="mt-7 text-[16px] font-semibold text-white/90">{children}</h5>,
-                            h6: ({ children }) => <h6 className="mt-7 text-[14px] font-semibold text-white/80">{children}</h6>,
+                                    h1: ({ children, node }) => <h1 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-12 scroll-mt-24 text-[28px] font-semibold leading-tight text-white">{children}</h1>,
+                                    h2: ({ children, node }) => <h2 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-11 scroll-mt-24 text-[23px] font-semibold leading-tight text-white">{children}</h2>,
+                                    h3: ({ children, node }) => <h3 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-9 scroll-mt-24 text-[20px] font-semibold leading-tight text-white">{children}</h3>,
+                                    h4: ({ children, node }) => <h4 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-8 scroll-mt-24 text-[18px] font-semibold text-white/95">{children}</h4>,
+                                    h5: ({ children, node }) => <h5 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-7 scroll-mt-24 text-[16px] font-semibold text-white/90">{children}</h5>,
+                                    h6: ({ children, node }) => <h6 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-7 scroll-mt-24 text-[14px] font-semibold text-white/80">{children}</h6>,
                             p: ({ children }) => <p className="mt-5 break-words text-[15px] font-light leading-[1.75] text-white/80">{children}</p>,
                             ul: ({ children }) => <ul className="mt-5 list-disc space-y-2 pl-6 text-[15px] font-light leading-[1.75] text-white/80">{children}</ul>,
                             ol: ({ children }) => <ol className="mt-5 list-decimal space-y-2 pl-6 text-[15px] font-light leading-[1.75] text-white/80">{children}</ol>,
