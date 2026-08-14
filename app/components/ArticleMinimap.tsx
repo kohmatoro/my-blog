@@ -3,15 +3,6 @@
 import type { ArticleHeading } from "@/lib/markdown";
 import { useEffect, useState } from "react";
 
-const markerWidths: Record<number, number> = {
-    1: 40,
-    2: 30,
-    3: 22,
-    4: 16,
-    5: 12,
-    6: 8,
-};
-
 type ArticleMinimapProps = {
     headings: ArticleHeading[];
 };
@@ -74,31 +65,46 @@ export default function ArticleMinimap({ headings }: ArticleMinimapProps) {
     return (
         <nav
             aria-label="문서 목차"
-            className="fixed right-0 top-1/2 z-40 hidden max-h-[72vh] w-14 -translate-y-1/2 overflow-y-auto rounded-l-[28px] border-l border-white/10 bg-[#171717]/92 py-3 pl-3 opacity-80 shadow-[-8px_0_24px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-opacity duration-300 hover:opacity-100 lg:block scrollbar-hide"
+            className="fixed right-0 top-1/2 z-40 hidden w-12 -translate-y-1/2 py-3 opacity-75 transition-opacity duration-300 hover:opacity-100 lg:block"
         >
-            <ol className="flex flex-col gap-[5px]">
+            <ol className="flex flex-col gap-1.5">
                 {headings.map((heading) => {
                     const isActive = activeId === heading.id;
+                    const tooltipId = `heading-preview-${heading.id}`;
 
                     return (
-                        <li key={heading.id} className="h-[7px]">
+                        <li key={heading.id} className="h-2.5">
                             <button
                                 type="button"
                                 onClick={() => moveToHeading(heading.id)}
-                                className="group flex h-full w-full items-center justify-end focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/80"
-                                title={heading.text}
+                                className="group relative flex h-full w-full items-center justify-end focus-visible:outline-none"
                                 aria-label={`${heading.text} 섹션으로 이동`}
                                 aria-current={isActive ? "location" : undefined}
+                                aria-describedby={tooltipId}
                             >
                                 <span
-                                    className={`block h-[3px] origin-right rounded-l-full transition-[background-color,box-shadow,opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
+                                    className={`block h-[3px] origin-right rounded-l-full transition-[width,background-color,box-shadow,opacity] duration-300 ease-out motion-reduce:transition-none ${
                                         isActive
-                                            ? "scale-x-110 bg-white opacity-100 shadow-[0_0_8px_rgba(255,255,255,0.28)]"
-                                            : "bg-white/30 opacity-80 group-hover:bg-white/60 group-hover:opacity-100"
+                                            ? "w-10 bg-white opacity-100 shadow-[0_0_8px_rgba(255,255,255,0.22)]"
+                                            : "w-6 bg-white/30 opacity-80 group-hover:w-8 group-hover:bg-white/60 group-hover:opacity-100 group-focus-visible:w-8 group-focus-visible:bg-white"
                                     }`}
-                                    style={{ width: markerWidths[heading.level] ?? markerWidths[6] }}
                                     aria-hidden="true"
                                 />
+
+                                <span
+                                    id={tooltipId}
+                                    role="tooltip"
+                                    className="pointer-events-none absolute right-full top-1/2 mr-4 w-[min(380px,calc(100vw-96px))] -translate-y-1/2 translate-x-2 rounded-[18px] border border-white/10 bg-[#303030] px-4 py-3.5 text-left opacity-0 shadow-[0_12px_36px_rgba(0,0,0,0.28)] transition-[opacity,transform] duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 motion-reduce:transition-none"
+                                >
+                                    <span className="block text-[15px] font-semibold leading-5 text-white">
+                                        {heading.text}
+                                    </span>
+                                    {heading.preview && (
+                                        <span className="mt-2 block max-h-[72px] overflow-hidden text-[14px] font-normal leading-6 text-white/55">
+                                            {heading.preview}
+                                        </span>
+                                    )}
+                                </span>
                             </button>
                         </li>
                     );

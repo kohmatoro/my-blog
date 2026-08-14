@@ -35,11 +35,12 @@ export default async function PostPage({ params }: PostPageProps) {
 
     const contentWithoutTitle = post.content.replace(/^#\s+.*\n+/, "");
     const headings = extractHeadings(contentWithoutTitle);
+    const primaryHeadings = headings.filter((heading) => heading.level === 1);
     const headingIdByLine = new Map(headings.map((heading) => [heading.line, heading.id]));
 
     return (
         <article>
-            <ArticleMinimap headings={headings} />
+            <ArticleMinimap headings={primaryHeadings} />
 
             <Container className="px-0 sm:px-4">
                 <div className="relative h-[180px] overflow-hidden sm:aspect-[4/1] sm:h-auto">
