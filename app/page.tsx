@@ -16,7 +16,7 @@ export default async function Home({
   const [featuredPost, ...compactPosts] = filteredPosts;
   const sectionTitle = selectedCategory;
   const sectionDescription = selectedCategory === "개발"
-    ? "개발관련 내용입니다."
+    ? "개발 관련 내용입니다."
     : selectedCategory === "음악"
       ? "좋아하는 음악과 앨범 후기입니다."
       : "일상의 경험을 기록합니다.";
