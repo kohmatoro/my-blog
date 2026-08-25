@@ -19,7 +19,7 @@ function formatDate(date: string) {
 export default function PostCard({
     slug,
     title,
-    category,
+    description,
     date,
     thumbnail,
     variant = "featured",
@@ -38,7 +38,7 @@ export default function PostCard({
                 </div>
                 <article className="flex min-w-0 flex-col justify-between px-4 py-3">
                     <div className="flex items-center justify-between gap-3 text-[12px]">
-                        <span className="text-[#48ad98]">{category}</span>
+                        <span className="min-w-0 truncate text-[#48ad98]" title={description}>{description}</span>
                         <time className="shrink-0 text-white/45" dateTime={date}>{formatDate(date)}</time>
                     </div>
                     <h2 className="mt-3 line-clamp-2 text-[15px] font-semibold leading-[1.45] text-white/90">{title}</h2>
@@ -62,7 +62,7 @@ export default function PostCard({
 
                 <div className="flex min-h-[105px] flex-col px-4 pb-4 pt-3">
                     <div className="flex items-center justify-between gap-3 text-[12px]">
-                        <span className="text-[#48ad98]">{category}</span>
+                        <span className="min-w-0 truncate text-[#48ad98]" title={description}>{description}</span>
                         <time className="shrink-0 text-white/45" dateTime={date}>{formatDate(date)}</time>
                     </div>
                     <h2 className="mt-2 line-clamp-2 text-[18px] font-semibold leading-[1.55] text-white/95 sm:text-[19px]">

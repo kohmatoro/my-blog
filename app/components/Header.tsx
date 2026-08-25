@@ -5,7 +5,7 @@ import CategoryNav from "./CategoryNav";
 
 function CategoryNavFallback() {
   return (
-    <ul className="flex items-center gap-6 text-[12px] text-white/30 sm:gap-8 sm:text-[13px]">
+    <ul className="flex items-center gap-6 text-[14px] text-white/30 sm:gap-8 sm:text-[13px]">
       <li className="text-white/85">포스트</li>
       <li>개발</li>
       <li>음악</li>

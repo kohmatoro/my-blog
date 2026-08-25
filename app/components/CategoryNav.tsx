@@ -15,7 +15,7 @@ export default function CategoryNav() {
     : "포스트";
 
   return (
-    <ul className="flex items-center gap-6 text-[12px] text-white/30 sm:gap-8 sm:text-[13px]">
+    <ul className="flex items-center gap-6 text-[14px] text-white/30 sm:gap-8 sm:text-[13px]">
       <li>
         <Link
           href="/"
