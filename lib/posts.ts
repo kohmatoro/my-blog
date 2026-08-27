@@ -6,6 +6,65 @@ import matter from "gray-matter";
 // path.join()으로 content/post내에 있는걸 묶어옴.
 const postsDirectory = path.join(process.cwd(), "content", "posts")
 
+function cleanInlineMarkdown(value: string) {
+    return value
+        .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+        .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+        .replace(/`([^`]+)`/g, "$1")
+        .replace(/<[^>]+>/g, "")
+        .replace(/[\*_~]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+function extractFirstParagraph(markdown: string) {
+    const lines = markdown.replace(/\r\n?/g, "\n").split("\n");
+    let inCodeFence = false;
+    let paragraph: string[] = [];
+
+    const readParagraph = () => cleanInlineMarkdown(paragraph.join(" "));
+
+    for (let index = 0; index < lines.length; index += 1) {
+        const line = lines[index].trim();
+        const nextLine = lines[index + 1]?.trim() ?? "";
+
+        if (/^(```|~~~)/.test(line)) {
+            inCodeFence = !inCodeFence;
+            paragraph = [];
+            continue;
+        }
+
+        if (inCodeFence) continue;
+
+        if (!line) {
+            const result = readParagraph();
+            if (result) return result;
+            paragraph = [];
+            continue;
+        }
+
+        const isSetextHeading = /^(=+|-+)$/.test(nextLine);
+        const isBlockContent = /^(#{1,6}\s|>\s?|[-+*]\s+|\d+[.)]\s+|!\[[^\]]*\]\([^)]*\)\s*$|\|.*\||-{3,}$|\*{3,}$|_{3,}$|<)/.test(line);
+
+        if (isSetextHeading || isBlockContent) {
+            const result = readParagraph();
+            if (result) return result;
+            paragraph = [];
+            continue;
+        }
+
+        paragraph.push(line);
+    }
+
+    return readParagraph();
+}
+
+function getExcerpt(excerpt: unknown, content: string) {
+    return typeof excerpt === "string" && excerpt.trim()
+        ? excerpt.trim()
+        : extractFirstParagraph(content);
+}
+
 export function getAllPosts() {
 
     // postDirectory로 지정된 디렉토리의 파일과 폴더 목록을
@@ -35,6 +94,7 @@ export function getAllPosts() {
                 slug: slug,
                 title: gray.data.title,
                 description: gray.data.description,
+                excerpt: getExcerpt(gray.data.excerpt, gray.content),
                 category: gray.data.category,
                 date: gray.data.date,
                 thumbnail: gray.data.thumbnail
@@ -62,6 +122,7 @@ export function getPostBySlug(slug: string) {
         slug,
         title: gray.data.title,
         description: gray.data.description,
+        excerpt: getExcerpt(gray.data.excerpt, gray.content),
         category: gray.data.category,
         date: gray.data.date,
         thumbnail: gray.data.thumbnail,

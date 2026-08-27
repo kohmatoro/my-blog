@@ -5,6 +5,7 @@ type PostCardProps = {
     slug: string;
     title: string;
     description: string;
+    excerpt: string;
     category: string;
     date: string;
     thumbnail: string;
@@ -20,6 +21,7 @@ export default function PostCard({
     slug,
     title,
     description,
+    excerpt,
     date,
     thumbnail,
     variant = "featured",
@@ -60,7 +62,7 @@ export default function PostCard({
                     className="aspect-[2.82/1] w-full border-b border-white/20 object-cover opacity-75 transition duration-300 group-hover:opacity-90"
                 />
 
-                <div className="flex min-h-[105px] flex-col px-4 pb-4 pt-3">
+                <div className="flex min-h-[105px] flex-col px-4 pb-3 pt-3">
                     <div className="flex items-center justify-between gap-3 text-[12px]">
                         <span className="min-w-0 truncate text-[#48ad98]" title={description}>{description}</span>
                         <time className="shrink-0 text-white/45" dateTime={date}>{formatDate(date)}</time>
@@ -68,6 +70,9 @@ export default function PostCard({
                     <h2 className="mt-2 line-clamp-2 text-[18px] font-semibold leading-[1.55] text-white/95 sm:text-[19px]">
                         {title}
                     </h2>
+                    {excerpt && (
+                        <p className="mt-1 line-clamp-1 text-[13px] font-light leading-[1.6] text-white/45 sm:text-[14px]">{excerpt}</p>
+                    )}
                 </div>
             </article>
         </Link>
