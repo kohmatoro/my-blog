@@ -81,7 +81,7 @@ export function getAllPosts() {
             // replace의 뜻은 .md를 찾아 ""(공백)으로 바꿔라.
             const slug = file.replace(".md", "")
 
-            // .../content/posts/first-post.md
+            // .../content/posts/markdown-syntax-guide.md
             const fullPath = path.join(postsDirectory, file)
 
             // utf-8로 읽기.

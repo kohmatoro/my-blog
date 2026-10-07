@@ -8,10 +8,10 @@ category: "음악"
 
 date: "2026-08-29"
 
-thumbnail: "/images/posts/music_1/thumbnail.jpeg"
+thumbnail: "/images/posts/why-i-collect-cds/cd-collection-thumbnail.jpeg"
 
 ---
 
 cd 왜모음??
 
-![앨범 이미지들](body-01.png)
+![앨범 이미지들](cd-collection-overview.png)

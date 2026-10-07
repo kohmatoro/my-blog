@@ -8,7 +8,7 @@ category: "포스트"
 
 date: "2026-05-30"
 
-thumbnail: "/images/posts/first-post/thumbnail.png"
+thumbnail: "/images/posts/markdown-syntax-guide/markdown-guide-thumbnail.png"
 
 ---
 
@@ -156,4 +156,4 @@ __double underscores__
 ~~cancelline~~
 
 ## 1.8 이미지
-![Alt text](body-01.png)
+![마크다운 이미지 문법 예시](markdown-image-example.png)
