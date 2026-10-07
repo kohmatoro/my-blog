@@ -8,7 +8,7 @@ category: "포스트"
 
 date: "2026-05-30"
 
-thumbnail: "/images/post-1thumb.png"
+thumbnail: "/images/posts/first-post/thumbnail.png"
 
 ---
 
@@ -156,4 +156,4 @@ __double underscores__
 ~~cancelline~~
 
 ## 1.8 이미지
-![Alt text](/images/alter.png)
+![Alt text](body-01.png)

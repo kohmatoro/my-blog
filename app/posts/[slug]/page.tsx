@@ -21,6 +21,18 @@ function formatDate(date: string) {
     return year && month && day ? `${year.slice(2)}.${month}.${day}` : date;
 }
 
+function resolvePostImageSource(src: string | Blob | undefined, slug: string) {
+    if (typeof src !== "string") {
+        return "";
+    }
+
+    if (src.startsWith("/") || src.startsWith("data:") || /^(?:https?:)?\/\//.test(src)) {
+        return src;
+    }
+
+    return `/images/posts/${slug}/${src.replace(/^\.\//, "")}`;
+}
+
 export function generateStaticParams() {
     return getAllPosts().map((post) => ({ slug: post.slug }));
 }
@@ -91,7 +103,7 @@ export default async function PostPage({ params }: PostPageProps) {
                             del: ({ children }) => <del className="text-white/45 line-through">{children}</del>,
                             hr: () => <hr className="my-12 border-white/20" />,
                             a: ({ href, children }) => <a href={href} className="text-[#62c5b1] underline underline-offset-4" target="_blank" rel="noreferrer">{children}</a>,
-                            img: ({ src, alt }) => <img src={src ?? ""} alt={alt ?? ""} className="my-9 block h-auto w-full opacity-90" />,
+                            img: ({ src, alt }) => <img src={resolvePostImageSource(src, post.slug)} alt={alt ?? ""} className="mx-auto my-9 block h-auto max-h-[720px] w-auto max-w-full border border-white/10 object-contain opacity-90" />,
                             code: ({ children }) => <code className="bg-white/10 px-1.5 py-0.5 text-[14px] text-white/90">{children}</code>,
                             pre: ({ children }) => <pre className="mt-7 overflow-x-auto bg-white/[0.07] p-5 text-[14px] leading-7 text-white/85 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit">{children}</pre>,
                             table: ({ children }) => <div className="mt-7 overflow-x-auto"><table className="w-full border-collapse text-left text-[14px]">{children}</table></div>,
