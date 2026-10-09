@@ -80,7 +80,9 @@ export default async function PostPage({ params }: PostPageProps) {
                 </h1>
 
                 <div className="mt-7 flex items-center justify-between border-b border-white/75 pb-4 text-[14px]">
-                    <span className="text-[#48ad98]">{post.category}</span>
+                    <span className="text-[#48ad98]">
+                        {post.category}{post.description ? ` - ${post.description}` : ""}
+                    </span>
                     <time className="text-white/35" dateTime={post.date}>{formatDate(post.date)}</time>
                 </div>
 
