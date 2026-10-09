@@ -84,31 +84,19 @@ export default async function PostPage({ params }: PostPageProps) {
                     <time className="text-white/35" dateTime={post.date}>{formatDate(post.date)}</time>
                 </div>
 
-                <div className="pb-4 pt-5 text-white/80">
+                <div className="typeset typeset-blog pb-4 pt-5">
                     <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         components={{
-                                    h1: ({ children, node }) => <h1 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-12 scroll-mt-24 text-[28px] font-semibold leading-tight text-white">{children}</h1>,
-                                    h2: ({ children, node }) => <h2 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-11 scroll-mt-24 text-[23px] font-semibold leading-tight text-white">{children}</h2>,
-                                    h3: ({ children, node }) => <h3 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-9 scroll-mt-24 text-[20px] font-semibold leading-tight text-white">{children}</h3>,
-                                    h4: ({ children, node }) => <h4 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-8 scroll-mt-24 text-[18px] font-semibold text-white/95">{children}</h4>,
-                                    h5: ({ children, node }) => <h5 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-7 scroll-mt-24 text-[16px] font-semibold text-white/90">{children}</h5>,
-                                    h6: ({ children, node }) => <h6 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="mt-7 scroll-mt-24 text-[14px] font-semibold text-white/80">{children}</h6>,
-                            p: ({ children }) => <p className="mt-5 break-words text-[15px] font-light leading-[1.75] text-white/80">{children}</p>,
-                            ul: ({ children }) => <ul className="mt-5 list-disc space-y-2 pl-6 text-[15px] font-light leading-[1.75] text-white/80">{children}</ul>,
-                            ol: ({ children }) => <ol className="mt-5 list-decimal space-y-2 pl-6 text-[15px] font-light leading-[1.75] text-white/80">{children}</ol>,
-                            blockquote: ({ children }) => <blockquote className="mt-7 border-l-2 border-[#48ad98] pl-5 text-white/60">{children}</blockquote>,
-                            strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
-                            em: ({ children }) => <em className="italic text-white/85">{children}</em>,
-                            del: ({ children }) => <del className="text-white/45 line-through">{children}</del>,
-                            hr: () => <hr className="my-12 border-white/20" />,
-                            a: ({ href, children }) => <a href={href} className="text-[#62c5b1] underline underline-offset-4" target="_blank" rel="noreferrer">{children}</a>,
-                            img: ({ src, alt }) => <img src={resolvePostImageSource(src, post.slug)} alt={alt ?? ""} className="mx-auto my-9 block h-auto max-h-[720px] w-auto max-w-full border border-white/10 object-contain opacity-90" />,
-                            code: ({ children }) => <code className="bg-white/10 px-1.5 py-0.5 text-[14px] text-white/90">{children}</code>,
-                            pre: ({ children }) => <pre className="mt-7 overflow-x-auto bg-white/[0.07] p-5 text-[14px] leading-7 text-white/85 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit">{children}</pre>,
-                            table: ({ children }) => <div className="mt-7 overflow-x-auto"><table className="w-full border-collapse text-left text-[14px]">{children}</table></div>,
-                            th: ({ children }) => <th className="border border-white/20 bg-white/10 px-3 py-2 font-semibold">{children}</th>,
-                            td: ({ children }) => <td className="border border-white/15 px-3 py-2 text-white/70">{children}</td>,
+                            h1: ({ children, node }) => <h1 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="scroll-mt-24">{children}</h1>,
+                            h2: ({ children, node }) => <h2 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="scroll-mt-24">{children}</h2>,
+                            h3: ({ children, node }) => <h3 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="scroll-mt-24">{children}</h3>,
+                            h4: ({ children, node }) => <h4 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="scroll-mt-24">{children}</h4>,
+                            h5: ({ children, node }) => <h5 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="scroll-mt-24">{children}</h5>,
+                            h6: ({ children, node }) => <h6 id={headingIdByLine.get(node?.position?.start.line ?? -1)} className="scroll-mt-24">{children}</h6>,
+                            a: ({ href, children }) => <a href={href} target="_blank" rel="noreferrer">{children}</a>,
+                            img: ({ src, alt }) => <img src={resolvePostImageSource(src, post.slug)} alt={alt ?? ""} className="mx-auto block max-h-[720px] w-auto border border-white/10 object-contain opacity-90" />,
+                            table: ({ children }) => <div className="typeset-scroll"><table>{children}</table></div>,
                         }}
                     >
                         {contentWithoutTitle}
